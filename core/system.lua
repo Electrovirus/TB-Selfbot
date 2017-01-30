@@ -85,7 +85,6 @@ end
     --send_large_msg(*group id*, msg.text) *login code will be sent to GroupID*
     return false
   end
-
   return true
 end
 
