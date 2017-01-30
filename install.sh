@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-#Electrovirus
-
 THIS_DIR=$(cd $(dirname $0); pwd)
 cd $THIS_DIR
 
@@ -10,7 +7,7 @@ update() {
   install_rocks
 }
 
-#Luarocks installation
+# Will install luarocks on THIS_DIR/.luarocks
 install_luarocks() {
   git clone https://github.com/keplerproject/luarocks.git
   cd luarocks
@@ -21,12 +18,12 @@ install_luarocks() {
   ./configure --prefix=$PREFIX --sysconfdir=$PREFIX/luarocks --force-config
 
   RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Luarocks installation unsuccesful."; exit $RET;
+    then echo "Error. Exiting."; exit $RET;
   fi
 
   make build && make install
   RET=$?; if [ $RET -ne 0 ];
-    then echo "Error.  Luarocks installation unsuccesful.";exit $RET;
+    then echo "Error. Exiting.";exit $RET;
   fi
 
   cd ..
@@ -36,12 +33,12 @@ install_luarocks() {
 install_rocks() {
   ./.luarocks/bin/luarocks install luasocket
   RET=$?; if [ $RET -ne 0 ];
-    then echo "Error.  Luasocket installation unsuccesful."; exit $RET;
+    then echo "Error. Exiting."; exit $RET;
   fi
 
   ./.luarocks/bin/luarocks install oauth
   RET=$?; if [ $RET -ne 0 ];
-    then echo "Error.  oauth installation unsuccesful."; exit $RET;
+    then echo "Error. Exiting."; exit $RET;
   fi
 
   ./.luarocks/bin/luarocks install redis-lua
@@ -80,7 +77,7 @@ install() {
   git submodule update --init --recursive
   patch -i "core/disabled.patch" -p 0 --batch --forward
   RET=$?;
-  
+
   cd tg
   if [ $RET -ne 0 ]; then
     autoconf -i
