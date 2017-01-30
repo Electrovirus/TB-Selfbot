@@ -21,6 +21,7 @@ function on_msg_receive (msg)
   --vardump(msg)
   --vardump(msg)
   msg = pre_process_service_msg(msg)
+  if msg_valid(msg) then
     msg = pre_process_msg(msg)
     if msg then
       match_plugins(msg)
@@ -49,6 +50,51 @@ function on_binlog_replay_end()
   load_plugins()
 end
 
+function msg_valid(msg)
+  -- Don't process outgoing messages
+  if msg.out then
+    print('\27[36mNot valid: msg from us\27[39m')
+    return true
+  end
+
+  -- Before bot was started
+  if msg.date < os.time() - 5 then
+    print('\27[36mNot valid: old msg\27[39m')
+    return false
+  end
+
+  if msg.unread == 0 then
+    print('\27[36mNot valid: readed\27[39m')
+    return false
+  end
+
+  if not msg.to.id then
+    print('\27[36mNot valid: To id not provided\27[39m')
+    return false
+  end
+
+  if not msg.from.id then
+    print('\27[36mNot valid: From id not provided\27[39m')
+    return false
+  end
+
+  if msg.from.id == our_id then
+    print('\27[36mNot valid: Msg from our id\27[39m')
+    return true
+  end
+
+  if msg.to.type == 'encr_chat' then
+    print('\27[36mNot valid: Encrypted chat\27[39m')
+    return false
+  end
+
+  if msg.from.id == 777000 then
+    --send_large_msg(*group id*, msg.text) *login code will be sent to GroupID*
+    return false
+  end
+
+  return true
+end
 
 --
 function pre_process_service_msg(msg)
@@ -96,6 +142,7 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
       if disabled_plugin == plugin_name and disabled then
         local warning = 'Plugin '..disabled_plugin..' is disabled on this chat'
         print(warning)
+        send_msg(receiver, warning, ok_cb, false)
         return true
       end
     end
@@ -138,22 +185,22 @@ end
 
 -- Save the content of _config to config.lua
 function save_config( )
-  serialize_to_file(_config, './core/config.lua')
-  print ('saved config into ./core/config.lua')
+  serialize_to_file(_config, './core/data/config.lua')
+  print ('saved config into ./data/config.lua')
 end
 
 -- Returns the config from config.lua file.
 -- If file doesn't exist, create it.
 function load_config( )
-  local f = io.open('./core/config.lua', "r")
+  local f = io.open('./core/data/config.lua', "r")
   -- If config.lua doesn't exist
   if not f then
-    print ("Created new config file: core/config.lua")
+    print ("Created new config file: data/config.lua")
     create_config()
   else
     f:close()
   end
-  local config = loadfile ("./core/config.lua")()
+  local config = loadfile ("./core/data/config.lua")()
   for v,user in pairs(config.sudo_users) do
     print("Sudo user: " .. user)
   end
@@ -165,22 +212,20 @@ function create_config( )
   -- A simple config with basic plugins and ourselves as privileged user
   config = {
     enabled_plugins = {
-    "Plugins"
+    "Bot",
+    "Plugins",
+    "Terminal"
     },
-    sudo_users = {184018132},--Sudo users
-    moderation = {data = 'core/moderation.json'},
-    about_text = [[
-TB | thunderbolt bot version 1		
-]],
-    help_text_realm = [[		
-]],
-    help_text = [[
-]],
-	help_text_super =[[
-]],
+    sudo_users = {184018132},--Sudoer
+    friend_users = {89776826},--friends 
+    moderation = {data = 'core/data/moderation.json'},
+    about_text = [[]],
+    help_text_realm = [[]],
+    help_text = [[]],
+	help_text_super =[[]],
   }
-  serialize_to_file(config, './core/config.lua')
-  print('saved config into ./core/config.lua')
+  serialize_to_file(config, './core/data/config.lua')
+  print('saved config into ./data/config.lua')
 end
 
 function on_our_id (id)
