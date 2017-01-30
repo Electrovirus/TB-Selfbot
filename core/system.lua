@@ -82,8 +82,6 @@ end
     return false
   end
 
-  return true
-end
 
 --
 function pre_process_service_msg(msg)
