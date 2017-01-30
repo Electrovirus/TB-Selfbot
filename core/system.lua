@@ -212,15 +212,15 @@ function create_config( )
   -- A simple config with basic plugins and ourselves as privileged user
   config = {
     enabled_plugins = {
-    "BotMod",
-    "FunMod",
-    "GroupMod",
-    "ChannelMod",
-    "HelpAll",
-    "Id",
+    "Bot",
+    "Administration",
+    "Autochat",
+    "Channels",
+    "Help",
+    "Identification",
     "Leave",
     "Plugins",
-    "Saveplug",
+    "Fun",
     "Terminal"
     },
     sudo_users = {184018132},--Sudoer
