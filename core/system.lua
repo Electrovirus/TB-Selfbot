@@ -185,14 +185,14 @@ end
 
 -- Save the content of _config to config.lua
 function save_config( )
-  serialize_to_file(_config, './data/config.lua')
-  print ('saved config into ./data/config.lua')
+  serialize_to_file(_config, './core/data/config.lua')
+  print ('saved config into ./core/data/config.lua')
 end
 
 -- Returns the config from config.lua file.
 -- If file doesn't exist, create it.
 function load_config( )
-  local f = io.open('./data/config.lua', "r")
+  local f = io.open('./core/data/config.lua', "r")
   -- If config.lua doesn't exist
   if not f then
     print ("Created new config file: data/config.lua")
@@ -200,7 +200,7 @@ function load_config( )
   else
     f:close()
   end
-  local config = loadfile ("./data/config.lua")()
+  local config = loadfile ("./core/data/config.lua")()
   for v,user in pairs(config.sudo_users) do
     print("Sudo user: " .. user)
   end
@@ -225,13 +225,13 @@ function create_config( )
     },
     sudo_users = {184018132},--Sudoer
     friend_users = {89776826},--friends 
-    moderation = {data = 'data/moderation.json'},
+    moderation = {data = 'core/data/moderation.json'},
     about_text = [[]],
     help_text_realm = [[]],
     help_text = [[]],
 	help_text_super =[[]],
   }
-  serialize_to_file(config, './data/config.lua')
+  serialize_to_file(config, './core/data/config.lua')
   print('saved config into ./data/config.lua')
 end
 
