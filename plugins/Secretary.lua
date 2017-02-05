@@ -1,5 +1,5 @@
  local function run(msg, matches) 
-if matches[1] == "setpm" then 
+if matches[1] == "setsecpm" then 
 if not is_sudo(msg) then 
 return 'You are not sudo' 
 end 
