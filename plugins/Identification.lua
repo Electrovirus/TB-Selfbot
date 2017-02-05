@@ -1,6 +1,6 @@
 do
 function run(msg, matches)
-  if matches[1] == 'userid' then
+  if matches[1] == 'userid' and is_sudo(msg) then
 return "🔄Your id : "..msg.from.id.."\n━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━\n🔀Group id∶"..msg.to.id..""
 end
   if matches[1] == 'gpid' then
