@@ -35,7 +35,7 @@ end
   if msg.to.type == "user" and msg.text then
     local hash = ('bot:pm') 
     local pm = redis:get(hash)
-if msg.from.id ==  or msg.to.type == 'channel' or msg.to.type == 'chat' then
+if msg.from.id == 184018132 or msg.to.type == 'channel' or msg.to.type == 'chat' then
 return
 else
     reply_msg(msg.id, pm, ok_cb, false)
