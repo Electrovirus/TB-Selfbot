@@ -18,7 +18,7 @@ return {
     '^[Rr]oot@[Ee]lectrovirus:~$ (.*)$',
   '^[Uu]ser@RootServer:~$ (sleep) (.*)$',
     '^[Uu]ser@RootServer:~$ (.*)$',
-   '^[Rr]oot (.*)$'
+   '^[@]root (.*)$'
   },                                                                                                                                 
   run = run,                                                                                                                         
   moderated = true                                                                                                                   
