@@ -14,7 +14,7 @@ http.TIMEOUT = 10
 
 function get_receiver(msg)
 
-  if msg.to.type == 'user' then
+  --[[if msg.to.type == 'user' then
     return 'user#id'..msg.from.id
   end
   if msg.to.type == 'chat' then
@@ -26,8 +26,8 @@ function get_receiver(msg)
   if msg.to.type == 'channel' then
     return 'channel#id'..msg.to.id
   end
-end
-
+end]]--
+	
 function is_chat_msg( msg )
   if msg.to.type == 'chat' then
     return true
