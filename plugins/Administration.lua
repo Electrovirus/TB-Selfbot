@@ -170,14 +170,14 @@ if matches[1] == 'setlink' and is_sudo(msg) then
         end
      end
 
-if matches[1] == 'kick' and is_sudo(msg) then
+if matches[1] == 'remove' and is_sudo(msg) then
             local chat_id = msg.to.id
             local chat_type = msg.to.type
             if msg.reply_id then
                 get_message(msg.reply_id, chat_kick, false)
                 return
             end
-            if matches[1] == 'kick' and is_sudo(msg) then
+            if matches[1] == 'remove' and is_sudo(msg) then
                 local member = string.gsub(matches[2], '@', '')
                 resolve_username(member, kick_by_username, {chat_id=chat_id, member=member, chat_type=chat_type})
                 return
@@ -191,14 +191,14 @@ if matches[1] == 'kick' and is_sudo(msg) then
             end
         end
 
-   if matches[1] == 'inv' and is_sudo(msg) then
+   if matches[1] == 'invite' and is_sudo(msg) then
             local chat_id = msg.to.id
             local chat_type = msg.to.type
             if msg.reply_id then
                 get_message(msg.reply_id, add_by_reply, false)
                 return
             end
-   if matches[1] == 'inv' and is_sudo(msg) then
+   if matches[1] == 'invite' and is_sudo(msg) then
                 local member = string.gsub(matches[2], '@', '')
                 print(chat_id)
                 resolve_username(member, add_by_username, {chat_id=chat_id, member=member, chat_type=chat_type})
@@ -293,8 +293,8 @@ return {
         '^[!/#](newlink)$',
         '^[!/#](setlink) (.*)$',
         '^[!/#](setdes) (.*)$',
-        "^[!/#](kick)$",
-        "^[!/#](kick) (.*)$",
+        "^[!/#](remove)$",
+        "^[!/#](remove) (.*)$",
         "^[!/#](silent)$",
         "^[!/#](silent) (.*)$",
         "^[!/#](unsilent)$",
@@ -302,8 +302,8 @@ return {
         "^[/!#](mute all)$",
         "^[/!#](unmute all)$",
 		     "^[/!#](mute status)$",
-        "^[!/#](inv)$",
-        "^[!/#](inv) (.*)$",
+        "^[!/#](invite)$",
+        "^[!/#](invite) (.*)$",
     },
     patterns = {
         '^[!/#](setname) (.*)$',
@@ -312,8 +312,8 @@ return {
         '^[!/#](newlink)$',
         '^[!/#](setlink) (.*)$',
         '^[!/#](setdes) (.*)$',
-        "^[!/#](kick)$",
-        "^[!/#](kick) (.*)$",
+        "^[!/#](remove)$",
+        "^[!/#](remove) (.*)$",
         "^[!/#](silent)$",
         "^[!/#](silent) (.*)$",
         "^[!/#](unsilent)$",
@@ -321,8 +321,8 @@ return {
         "^[/!#](mute all)$",
         "^[/!#](unmute all)$",
 		     "^[/!#](mute status)$",
-        "^[!/#](inv)$",
-        "^[!/#](inv) (.*)$",
+        "^[!/#](invite)$",
+        "^[!/#](invite) (.*)$",
     },
       run = run,
 pre_process = pre_process
