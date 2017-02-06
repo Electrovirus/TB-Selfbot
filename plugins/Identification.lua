@@ -9,7 +9,7 @@ end
 end
 return {
   usage = {
-    '!ids : user id'
+    '!ids : user id',
     '!phone : phone number'
   },
   patterns = {
