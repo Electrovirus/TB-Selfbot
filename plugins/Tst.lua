@@ -1,6 +1,4 @@
 
---Begin supergrpup.lua
---Check members #Add supergroup
 local function check_member_super(cb_extra, success, result)
   local receiver = cb_extra.receiver
   local data = cb_extra.data
@@ -40,8 +38,8 @@ local function check_member_super(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = msg.to.id
       save_data(_config.moderation.data, data)
-	  local text = '#⃣SuperGroup is added to \ncore/database/moderation\n⚠️Database reloaded\n┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n📍Added by ⇒ Sudoer\n📍Owner ⇒ Not set \n{Set group holder by /setowner (@username)}\n📍ExpireDate ⇒ Not set\n{Set expire date by /setexpire (value 1-999)}\n📍Commands list ⇒ /help'
-      return reply_msg(msg.id, text, ok_cb, false)
+	  local text = 'SelfBot is On in this Group🔄'
+	return reply_msg(msg.id, text, ok_cb, false)
     end
   end
 end
@@ -64,7 +62,7 @@ local function check_member_superrem(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = nil
       save_data(_config.moderation.data, data)
-	  local text = 'SuperGroup has been removed'
+	  local text = 'Selfbot is off in this Group🔀'
       return reply_msg(msg.id, text, ok_cb, false)
     end
   end
@@ -180,11 +178,11 @@ local function lock_group_links(msg, data, target)
   end
   local group_link_lock = data[tostring(target)]['settings']['lock_link']
   if group_link_lock == 'yes' then
-    return 'Link posting is already locked'
+    return '🔄Link posting is already locked'
   else
     data[tostring(target)]['settings']['lock_link'] = 'yes'
     save_data(_config.moderation.data, data)
-    return 'Link posting has been locked'
+    return '🔄Link posting has been locked'
   end
 end
 
@@ -194,11 +192,11 @@ local function unlock_group_links(msg, data, target)
   end
   local group_link_lock = data[tostring(target)]['settings']['lock_link']
   if group_link_lock == 'no' then
-    return 'Link posting is not locked'
+    return 🔄'Link posting is not locked'
   else
     data[tostring(target)]['settings']['lock_link'] = 'no'
     save_data(_config.moderation.data, data)
-    return 'Link posting has been unlocked'
+    return '🔄Link posting has been unlocked'
   end
 end
 
@@ -593,7 +591,7 @@ local function lock_group_spam(msg, data, target)
   else
     data[tostring(target)]['settings']['lock_spam'] = 'yes'
     save_data(_config.moderation.data, data)
-    return 'SuperGroup spam has been locked'
+    return '🔄SuperGroup spam has been locked'
   end
 end
 
@@ -603,11 +601,11 @@ local function unlock_group_spam(msg, data, target)
   end
   local group_spam_lock = data[tostring(target)]['settings']['lock_spam']
   if group_spam_lock == 'no' then
-    return 'SuperGroup spam is not locked'
+    return '🔄SuperGroup spam is not locked'
   else
     data[tostring(target)]['settings']['lock_spam'] = 'no'
     save_data(_config.moderation.data, data)
-    return 'SuperGroup spam has been unlocked'
+    return '🔄SuperGroup spam has been unlocked'
   end
 end
 
@@ -617,11 +615,11 @@ local function lock_group_flood(msg, data, target)
   end
   local group_flood_lock = data[tostring(target)]['settings']['flood']
   if group_flood_lock == 'yes' then
-    return 'Flood is already locked'
+    return '🔄Flood is already locked'
   else
     data[tostring(target)]['settings']['flood'] = 'yes'
     save_data(_config.moderation.data, data)
-    return 'Flood has been locked'
+    return '🔄Flood has been locked'
   end
 end
 
@@ -631,11 +629,11 @@ local function unlock_group_flood(msg, data, target)
   end
   local group_flood_lock = data[tostring(target)]['settings']['flood']
   if group_flood_lock == 'no' then
-    return 'Flood is not locked'
+    return '🔄Flood is not locked'
   else
     data[tostring(target)]['settings']['flood'] = 'no'
     save_data(_config.moderation.data, data)
-    return 'Flood has been unlocked'
+    return '🔄Flood has been unlocked'
   end
 end
 
@@ -786,11 +784,11 @@ local function lock_group_bots(msg, data, target)
   end
   local group_bots_lock = data[tostring(target)]['settings']['lock_bots']
   if group_bots_lock == 'yes' then
-    return 'Bots protection is already enabled'
+    return '🔄Bots protection is already enabled'
   else
     data[tostring(target)]['settings']['lock_bots'] = 'yes'
     save_data(_config.moderation.data, data)
-    return 'Bots protection has been enabled'
+    return '🔄Bots protection has been enabled'
   end
 end
 
@@ -800,11 +798,11 @@ local function unlock_group_bots(msg, data, target)
   end
   local group_bots_lock = data[tostring(target)]['settings']['lock_bots']
   if group_bots_lock == 'no' then
-    return 'Bots protection is already disabled'
+    return '🔄Bots protection is already disabled'
   else
     data[tostring(target)]['settings']['lock_bots'] = 'no'
     save_data(_config.moderation.data, data)
-    return 'Bots protection has been disabled'
+    return '🔄Bots protection has been disabled'
   end
 end
 
@@ -1751,7 +1749,7 @@ local function run(msg, matches)
 				get_message(msg.reply_id, get_message_callback, cbreply_extra)
 			elseif matches[1] == 'block' or matches[1] == 'kick' and string.match(matches[2], '^%d+$') then
 				--[[local user_id = matches[2]
-				local channel_id = msg.to.id
+			local channel_id = msg.to.id
 				if is_momod2(user_id, channel_id) and not is_admin2(user_id) then
 					return send_large_msg(receiver, "You can't kick mods/owner/admins")
 				end
@@ -2683,7 +2681,7 @@ local function run(msg, matches)
 			return muted_user_list(chat_id)
 		end
 
-		if matches[1] == 'settings' and is_momod(msg) then
+		if matches[1] == 'gpsettings' and is_momod(msg) then
 			local target = msg.to.id
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup settings ")
 			return show_supergroup_settingsmod(msg, target)
@@ -2694,10 +2692,10 @@ local function run(msg, matches)
 			return get_rules(msg, data)
 		end
 
-		if matches[1] == 'help' and not is_owner(msg) then
+		if matches[1] == 'iiiihelp' and not is_owner(msg) then
 			text = ""
 			reply_msg(msg.id, text, ok_cb, false)
-		elseif matches[1] == 'help' and is_owner(msg) then
+		elseif matches[1] == 'iiiihelp' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] Used /superhelp")
 			return super_help()
@@ -2762,8 +2760,8 @@ end
 
 return {
   patterns = {
-	"^[#!/]([Aa]dd)$",
-	"^[#!/]([Rr]em)$",
+	"^[#!/]([Aa]ctive)$",
+	"^[#!/]([Ii]nactive)$",
 	"^[#!/]([Mm]ove) (.*)$",
 	"^[#!/]([Gg]pinfo)$",
 	"^[#!/]([Aa]dmins)$",
@@ -2809,7 +2807,7 @@ return {
 	"^[#!/]([Uu]nsilent)$",
 	"^[#!/]([Uu]nsilent) (.*)$",
 	"^[#!/]([Pp]ublic) (.*)$",
-	"^[#!/]([Ss]ettings)$",
+	"^[#!/]([Gg]psettings)$",
 	"^[#!/]([Rr]ules)$",
 	"^[#!/]([Ss]etflood) (%d+)$",
 	"^[#!/]([Cc]lean) (.*)$",
