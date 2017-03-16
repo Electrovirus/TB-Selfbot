@@ -32,7 +32,7 @@ return "Secretary inActivated"
 end
  end
 
-  if msg.to.type == "user" and msg.text then
+  if msg.to.type == "user" and not is_sudo(msg) and msg.text then
     local hash = ('bot:pm') 
     local pm = redis:get(hash)
 if msg.from.id == 184018132 or msg.to.type == 'channel' or msg.to.type == 'chat' then
