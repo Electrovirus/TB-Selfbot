@@ -38,7 +38,7 @@ local function check_member_super(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = msg.to.id
       save_data(_config.moderation.data, data)
-	  local text = 'SelfBot is On in this Group🔄'
+	  local text = 'SelfBot administration has been enabled🔄'
 	return reply_msg(msg.id, text, ok_cb, false)
     end
   end
@@ -62,7 +62,7 @@ local function check_member_superrem(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = nil
       save_data(_config.moderation.data, data)
-	  local text = 'Selfbot is off in this Group🔀'
+	  local text = 'Selfbot administration has been disabled🔀'
       return reply_msg(msg.id, text, ok_cb, false)
     end
   end
